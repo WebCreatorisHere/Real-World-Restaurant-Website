@@ -157,7 +157,7 @@ const LIST = ({ sendDataToParent, luci }) => {
 
   const increase = async (item, e) => {
     e.stopPropagation()
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "POST",
@@ -185,7 +185,7 @@ const LIST = ({ sendDataToParent, luci }) => {
   }
   const decrease = async (item, e) => {
     e.stopPropagation()
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "DELETE",
@@ -469,7 +469,7 @@ else{
       no_of_item: total
     }
     
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "POST",

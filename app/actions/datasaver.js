@@ -94,7 +94,7 @@ else{
 }
 }
 export const fetchcart = async ()=>{
-    let respo = await fetch("http://localhost:3000/dpi")
+    let respo = await fetch(`${process.env.URL}/dpi`)
     let c = await respo.json()
     return c
 }
@@ -123,6 +123,13 @@ Cart.collection.drop()
 
 export const savepayment = async (price,payment_form,itemarray)=>{
 await connectDB()
-await Cashpayment.create({amount:price,to_user:"Yash Dwivedi",name:payment_form.name,message:payment_form.comment,items:JSON.stringify(itemarray),number:payment_form.number,address:payment_form.address,house_no:payment_form.house})
+await Cashpayment.create({amount:price,
+   to_user:"Yash Dwivedi",
+   name:payment_form.name,
+   message:payment_form.comment,
+   items:JSON.stringify(itemarray),
+   number:payment_form.number,
+   address:payment_form.address,
+   house_no:payment_form.house})
 
 }

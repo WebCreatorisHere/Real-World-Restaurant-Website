@@ -49,7 +49,7 @@ setCartitems(dummy)
       imgname:item.imgname,
       extra:item.extra,
     }
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "POST",
@@ -84,7 +84,7 @@ setCartitems(dummy)
       imgname:item.imgname,
       extra:item.extra,
     }
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "DELETE",
@@ -127,7 +127,7 @@ setCartitems(dummy)
       imgname:item.imgname,
       extra:item.extra,
     }
-    let a = await fetch("http://localhost:3000/dpi", {
+    let a = await fetch("/dpi", {
 
       // Adding method type
       method: "PUT",
