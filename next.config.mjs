@@ -8,9 +8,7 @@ compiler: {
   
 },
 reactStrictMode: false,
-experimental: {
-  missingSuspenseWithCSRBailout: false, // Disable the option
-},
+
 };
 
 export default nextConfig;

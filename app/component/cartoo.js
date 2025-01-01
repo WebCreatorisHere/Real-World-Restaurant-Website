@@ -5,17 +5,16 @@ import { Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
 
-const CARTOO = ({sendotherToParent,sendDataToParent2,hint}) => {
+const CARTOO = ({sendotherToParent,sendDataToParent2,hint,dataFromChild,setvalue}) => {
   const basket = useRef()
   const closingbtn = useRef()
-  const [Cartitems, setCartitems] = useState([])
   const [count,setcount] = useState(0)
   useEffect(() => {
   cartgetter()
   }, [hint])
   const cartgetter = async()=>{
 let dummy = await fetchcart()
-setCartitems(dummy)
+sendDataToParent2(dummy)
 }
   
   useEffect(() => {
@@ -172,11 +171,12 @@ theme="light"
      <button ref={closingbtn} onClick={()=>{basket.current.classList.remove("gettingoverit")
               document.querySelector(".karla").classList.remove("increaser")
               toast.dismiss()
+              setvalue(false)
             }} aria-label="search" className="bg-[#f4b42d] z-50 hover:bg-[#065d63] transition w-[3.65rem] rounded-full absolute top-[10%] -left-8 rotate-90 flex justify-center py-3.5 ctn"><img loading="lazy" src="materials/arrow-top.svg" alt="" /></button>
 <div className="flex bbbbb items-center overflow-y-scroll h-[85%] flex-col colaberry">
 <h6 className='text-[#065d63] text-4xl px-[4.5rem] pt-[3.5rem]'>Basket</h6>
 
-  {Cartitems[0] && Cartitems.map((box)=>{
+  {dataFromChild[0] && dataFromChild.map((box)=>{
     return <div key={box.price+box.name} className="carti relative border-b flex py-6 items-center w-full h-fit px-6">
     <div onClick={()=>deletebhava(box)} className='absolute right-4 top-6 '><lord-icon
      src="https://cdn.lordicon.com/hwjcdycb.json"
@@ -207,7 +207,7 @@ theme="light"
      </div>
    </div>
   })}
-  {!Cartitems[0] && <div onLoad={()=>{sendotherToParent({typo:false})
+  {!dataFromChild[0] && <div onLoad={()=>{sendotherToParent({typo:false})
     closingbtn.current.style.display = "flex"
     }} className='flex justify-center items-center flex-col gap-5 relative top-[20%]'><div className="img"><img loading="lazy" src="https://burek.intexagency.com/wp-content/themes/burek/assets/img/icon-empty-cart.svg" alt="" /></div>
   <p className='shade'>Oops ... no items have been added to the cart yet</p>
@@ -219,13 +219,13 @@ theme="light"
   </div>}
   
 </div>
-{(Cartitems.reduce((accu, item) => { return accu + item.price * item.no_of_item }, 0) != 0) && <div className='p-4 malapur trans'>
+{(dataFromChild.reduce((accu, item) => { return accu + item.price * item.no_of_item }, 0) != 0) && <div className='p-4 malapur trans'>
   <button onClick={()=>{sendotherToParent({typo:true})
     closingbtn.current.style.display = "none"
     document.querySelector(".malapur").style.display = "none"
     document.querySelector(".colaberry").style.height = "100%"
   }} className='bg-[#f4b42d] py-4 justify-around px-10 flex items-center text-xl rounded-2xl w-full hover:bg-[#065d63] meena'>
-    <span className='text-white'>In general: <span className='text-4xl font-bold text-[#065d63]'>₹{Cartitems.reduce((accu, item) => { return accu + item.price * item.no_of_item }, 0)}</span></span>
+    <span className='text-white'>In general: <span className='text-4xl font-bold text-[#065d63]'>₹{dataFromChild.reduce((accu, item) => { return accu + item.price * item.no_of_item }, 0)}</span></span>
     <span className='text-[#065d63] font-semibold text-base'>TO ORDER --&gt;</span></button>
 </div>}
     </div>

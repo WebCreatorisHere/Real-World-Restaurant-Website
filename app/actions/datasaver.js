@@ -94,7 +94,7 @@ else{
 }
 }
 export const fetchcart = async ()=>{
-    let respo = await fetch(`${process.env.URL}/dpi`)
+    let respo = await fetch(`${process.env.NEXT_PUBLIC_URL}/dpi`)
     let c = await respo.json()
     return c
 }
@@ -111,7 +111,7 @@ var instance = new Razorpay({
     currency: "INR"
   };
  let x =await instance.orders.create(options)
-
+console.log(x)
   await Payment.create({oid:x.id,amount:amount/100,to_user:to_user,name:payment_form.name,message:payment_form.comment,items:JSON.stringify(itemarray),number:payment_form.number,address:payment_form.address,house_no:payment_form.house})
   return x
 }

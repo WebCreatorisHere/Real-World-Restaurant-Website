@@ -17,7 +17,7 @@ let xy = validatePaymentVerification({"order_id":body.razorpay_order_id,"payment
 
 if(xy){
     let paym = await Payment.findOneAndUpdate({oid:body.razorpay_order_id},{done:true},{new:true})
-   return NextResponse.redirect("http://localhost:3000?paymentdone=true")
+   return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}?paymentdone=true`)
 }
 else{
     return NextResponse.json({success:false,message:"Payment Varification failed"})
